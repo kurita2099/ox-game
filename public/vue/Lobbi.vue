@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>ABOUT</div>
-   <div v-if="message != undefined">{{message}}</div>
+  
   </div>
 </template>
 
