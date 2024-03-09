@@ -9,6 +9,10 @@
 {{ item.timestamp }}: {{ item.host }}
 </li>
 </ul>
+<button @click="createRoom">Create Room!</button><br>
+<br>
+<input type="text" maxlength="4" v-model="roomId" placeholder="Room ID">
+
   </div>
 </template>
 
@@ -19,6 +23,10 @@ module.exports = {
         ref: {},
 		//items: [{name:"2222",price:10000}],
         roomIds: [],
+        roomId:0,
+        id:0,
+        ref:{},
+        sync:{},
     }
   },
   created: async function() {
@@ -37,7 +45,42 @@ module.exports = {
   methods:{
     liEvent:function(index){
         console.log(index)
-    }
+    },
+    createRoom: async function(){
+//Guestが来るまで操作出来ないようにturnを-1に
+			this.sync.turn = -1
+			if (!this.roomId) {alert("ルームIDが空です");return;}
+			//id生成
+			this.id = this.createId()
+			this.sync.host = this.id
+            this.sync.roomId = this.roomId
+			//this.roomId = this.id.substr(4)
+			
+			//DB参照
+			this.ref = db.ref("/ox/" + this.roomId)
+			//対象room情報取得
+			const snapshot = await this.ref.once("value")
+			//既に部屋があったらリトライ
+			if (snapshot.val()) {alert("すでに使われています");return}
+			
+			//timestamp
+			this.sync.timestamp = moment(new Date).format("YYYY/MM/DD HH:mm:ss")
+			//DB更新
+			this.ref.set(this.sync)
+			//DBイベント定義
+			this.setPush()
+    },
+    setPush:function(){
+	    this.ref.on("value", function(snapshot) {
+				//DBデータをローカルへ反映
+				//vm.sync = snapshot.val()
+				//終了判定
+				//vm.gemaSet()
+                console.log("kkk")
+			})
+    },
+    createId: () => String(Math.random()).substr(2,8),
+		
   }
   
 }

@@ -63,6 +63,26 @@
 <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
 <!--<script src="ox.js"></script>-->
 <script>
+//firebase
+let db = {}
+// Get a reference to the auth service
+let auth = {};
+
+document.addEventListener("DOMContentLoaded", () => {
+	db = firebase.database()
+	auth = firebase.auth()
+	auth.signInAnonymously()
+				.then(() => {
+					console.log("Signed in..")
+
+				})
+				.catch((error) => {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					// ...
+				});
+});
+
 const router = new VueRouter({
 // The mode of the router
 mode: 'history',
