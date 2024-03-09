@@ -4,7 +4,7 @@
 
 <ul>
 <!-- items 配列の要素を item として繰り返しレンダリングする -->
-<li v-for="item in roomIds" :key="item.id">
+<li v-for="(item, index) in roomIds" :key="item.id"　@click="liEvent(index)">
 <!-- item がオブジェクトであると仮定し、そのプロパティを表示する -->
 {{ item.timestamp }}: {{ item.host }}
 </li>
@@ -34,5 +34,11 @@ module.exports = {
                     }
                 }),1000);
   },
+  methods:{
+    liEvent:function(index){
+        console.log(index)
+    }
+  }
+  
 }
 </script>
