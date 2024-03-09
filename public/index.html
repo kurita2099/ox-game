@@ -6,7 +6,7 @@
 <style>[v-cloak] {display:none;}</style>
 </head>
 <body>
-<div id="main" v-cloak>
+<!--<div id="main" v-cloak>
 	
 	<div :class="{dispoff: view != 'lobby'}">
 		<strong>OX GAME</strong><br>
@@ -35,6 +35,14 @@
 	</div>
 	
 </div>
+-->
+<div id="app">
+  <!-- The router-view tag -->
+  <router-view></router-view>
+  <!-- The router-link tag -->
+  <router-link to="/">Home</router-link>
+  <router-link to="/about">About</router-link>
+</div>
 <!-- update the version number as needed -->
 <script defer src="/__/firebase/4.6.0/firebase-app.js"></script>
 <!-- include only the Firebase features as you need -->
@@ -45,11 +53,42 @@
 <!-- initialize the SDK after all desired features are loaded -->
 <!--<script src="https://unpkg.com/vue"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
 <script src="https://unpkg.com/vue-router@3"></script>
+<script src="https://unpkg.com/http-vue-loader"></script>
 <script defer src="/__/firebase/init.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
-<script src="ox.js"></script>
+<!--<script src="ox.js"></script>-->
+<script>
+const router = new VueRouter({
+// The mode of the router
+mode: 'history',
+// The routes of the router
+routes: [
+// A route object
+{
+// The path of the route
+path: '/',
+// The component of the route
+component: httpVueLoader('./vue/Home.vue')
+},
+// Another route object
+{
+// The path of the route
+path: '/about',
+// The component of the route
+component: httpVueLoader('./vue/About.vue')
+}
+]
+});
 
+const app = new Vue({
+  el: "#app",
+
+  router // ← vue-router のマウントも忘れずに
+});
+
+</script>
 <style>
 * {
   font-family: メイリオ;
