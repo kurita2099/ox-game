@@ -1,0 +1,57 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=360, initial-scale=1">
+<title>OX GAME</title>
+</head>
+<body>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<!-- The Vue Router library -->
+<script src="https://unpkg.com/vue-router@3"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+<!--<script src="ox.js"></script>-->
+<!-- The app container -->
+
+<div id="app">
+  <!-- The router-view tag -->
+  <router-view></router-view>
+  <!-- The router-link tag -->
+  <router-link to="/">Home</router-link>
+  <router-link to="/about">About</router-link>
+  </div>
+<!-- The script to create the Vue Router instance -->
+<script>
+// Create the Vue Router instance
+const router = new VueRouter({
+// The mode of the router
+mode: 'history',
+// The routes of the router
+routes: [
+// A route object
+{
+// The path of the route
+path: '/',
+// The component of the route
+component: {
+// The template of the component
+template: '<h1>Home</h1>'
+}
+},
+// Another route object
+{
+// The path of the route
+path: '/about',
+// The component of the route
+component: {
+// The template of the component
+template: '<h1>About</h1>'
+}
+}
+]
+});
+</script>
+</body>
+</html>

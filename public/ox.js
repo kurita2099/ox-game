@@ -4,7 +4,23 @@ const l = v => console.log(v)
 
 //firebase
 let db = {}
-document.addEventListener("DOMContentLoaded", () => db = firebase.database());
+// Get a reference to the auth service
+let auth = {};
+
+document.addEventListener("DOMContentLoaded", () => {
+	db = firebase.database()
+	auth = firebase.auth()
+	auth.signInAnonymously()
+				.then(() => {
+					console.log("Signed in..")
+
+				})
+				.catch((error) => {
+					const errorCode = error.code;
+					const errorMessage = error.message;
+					// ...
+				});
+});
 
 //Vue
 const vm = new Vue({
@@ -32,6 +48,7 @@ const vm = new Vue({
 	methods: {
 		//初期化
 		initGame: function() {
+			this.initFireBase();
 			this.sync.board =  [
 				[3, 3, 3, 3, 3],
 				[3, 2, 2, 2, 3],
@@ -41,6 +58,11 @@ const vm = new Vue({
 			]
 			this.sync.turn = Math.round(Math.random())
 			this.sync.judgment = -1
+		},
+		initFireBase: function () {
+			
+			// Sign in anonymously
+			
 		},
 		
 		//部屋作成
