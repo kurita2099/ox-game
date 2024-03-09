@@ -4,9 +4,9 @@
 
 <ul>
 <!-- items 配列の要素を item として繰り返しレンダリングする -->
-<li v-for="(item, index) in roomIds" :key="item.id"　@click="liEvent(index)">
+<li v-for="(item, index) in roomIds" :key="item.id"　@click="liEvent(item.roomId)">
 <!-- item がオブジェクトであると仮定し、そのプロパティを表示する -->
-{{ item.timestamp }}: {{ item.host }}
+{{ item.timestamp }}: {{ item.roomId }}
 </li>
 </ul>
 <button @click="createRoom">Create Room!</button><br>
@@ -45,6 +45,7 @@ module.exports = {
   methods:{
     liEvent:function(index){
         console.log(index)
+        this.$router.push({path: 'Lobbie', query: { roomId: index} })
     },
     createRoom: async function(){
 //Guestが来るまで操作出来ないようにturnを-1に
@@ -71,12 +72,13 @@ module.exports = {
 			this.setPush()
     },
     setPush:function(){
-	    this.ref.on("value", function(snapshot) {
+	    this.ref.on("value", (snapshot) => {
 				//DBデータをローカルへ反映
 				//vm.sync = snapshot.val()
 				//終了判定
 				//vm.gemaSet()
                 console.log("kkk")
+                this.$router.push({path: 'Lobbie' ,query: { roomId: this.roomId}})
 			})
     },
     createId: () => String(Math.random()).substr(2,8),
