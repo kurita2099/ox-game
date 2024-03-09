@@ -4,7 +4,21 @@
 
 <script>
 //import Phaser from 'phaser'
-
+class MyScene1 extends Phaser.Scene {
+    constructor() {
+        //Sceneを拡張してクラスを作る際にコンストラクタでSceneの設定を渡します
+　　//keyでシーンのキー、activeでシーンの自動実行を設定できます
+        super({ key: 'MyScene1', active: true });
+    }
+    preload(){
+        this.load.image('logo', 'assets/logo.png')
+    }
+    create() {
+     
+        this.add.image(400, 300, 'logo')
+        //let text = this.add.text(100, 100, 'Phaser 3').setFontSize(64).setColor('#ff0');
+    }
+}
 module.exports ={
 name: 'Game',
 data() {
@@ -20,11 +34,7 @@ type: Phaser.AUTO,
 width: 800,
 height: 600,
 parent: 'game', // Vueのテンプレートにあるdiv要素のidを指定する
-scene: {
-preload: this.preload, // シーンのメソッドをVueのメソッドにバインドする
-create: this.create,
-update: this.update
-}
+scene: [MyScene1]
 }
 
 // Phaser3のインスタンスを作成する
