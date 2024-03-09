@@ -1,20 +1,23 @@
 <template>
   <div>
     <div>ABOUT</div>
-   
+   <div v-if="message != undefined">{{message}}</div>
   </div>
 </template>
 
 <script>
 module.exports = {
+  
+
   data() {
     return {
       roomIds:[]
     }
   },
+  props: ['message'],
   created: async function() {
    //DB参照
-   console.log(this.$route.query.roomId)
+   console.log(this.$userId)
    /*
 
 			db.ref("/ox/") 
