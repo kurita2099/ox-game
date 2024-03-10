@@ -79,7 +79,8 @@ module.exports = {
 				//vm.sync = snapshot.val()
 				//終了判定
 				//vm.gemaSet()
-                console.log("kkk")
+                this.global.userId=this.id;
+                this.global.roomId=　this.roomId;
                 this.$router.push({path: 'Lobbie' })
 			})
     },
