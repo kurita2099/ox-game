@@ -55,7 +55,8 @@
 <!--<script src="https://unpkg.com/vue"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
-<script src="https://unpkg.com/vue-router@3"></script>
+<!--<script src="https://unpkg.com/vue-router@3"></script>-->
+<script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script>
 <script src="https://unpkg.com/http-vue-loader"></script>
 
 <script defer src="/__/firebase/init.js"></script>
@@ -83,9 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
 				});
 });
 
+
+
 const router = new VueRouter({
 // The mode of the router
 mode: 'history',
+
 // The routes of the router
 routes: [
 // A route object
@@ -93,29 +97,53 @@ routes: [
 // The path of the route
 path: '/',
 // The component of the route
-component: httpVueLoader('./vue/Home.vue')
+props: true,
+component: httpVueLoader('./vue/Home.vue'),
 },
 // Another route object
 {
 // The path of the route
-path: '/lobbie',
+path: '/lobbie/',
 // The component of the route
-component: httpVueLoader('./vue/Lobbi.vue')
+component: httpVueLoader('./vue/Lobbi.vue'),
+//props: true,
 },
 {
 // The path of the route
 path: '/game',
 // The component of the route
-component: httpVueLoader('./vue/Game.vue')
+component: httpVueLoader('./vue/Game.vue'),
+//props: true,
 }
 ]
 });
 
+Vue.prototype.$db = db;
+Vue.prototype.$auth = auth;
+//global value
+var roomId = ""
+var userId = ""
+var name = ""
+const global = {
+  userId:userId,
+  roomId:roomId,
+  name:name
+};
+Vue.mixin({ 
+  data() { 
+    return { 
+      global
+    }
+  }
+})
+
+
 const app = new Vue({
   el: "#app",
-
   router // ← vue-router のマウントも忘れずに
 });
+
+
 
 </script>
 <style>

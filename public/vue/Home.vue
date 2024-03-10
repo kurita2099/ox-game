@@ -45,7 +45,9 @@ module.exports = {
   methods:{
     liEvent:function(index){
         console.log(index)
-        this.$router.push({path: 'Lobbie', query: { roomId: index} })
+        this.global.userId=this.createId();
+        this.global.roomId=index; 
+        this.$router.push({path: 'Lobbie'})
     },
     createRoom: async function(){
 //Guestが来るまで操作出来ないようにturnを-1に
@@ -78,7 +80,7 @@ module.exports = {
 				//終了判定
 				//vm.gemaSet()
                 console.log("kkk")
-                this.$router.push({path: 'Lobbie' ,query: { roomId: this.roomId}})
+                this.$router.push({path: 'Lobbie' })
 			})
     },
     createId: () => String(Math.random()).substr(2,8),

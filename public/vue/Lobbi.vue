@@ -17,7 +17,8 @@ module.exports = {
   props: ['message'],
   created: async function() {
    //DB参照
-   console.log(this.$userId)
+   
+   console.log(this.global.userId)
    /*
 
 			db.ref("/ox/") 
