@@ -118,13 +118,15 @@ component: httpVueLoader('./vue/Game.vue'),
 ]
 });
 
-Vue.prototype.$db = db;
-Vue.prototype.$auth = auth;
+//Vue.prototype.$db = db;
+//Vue.prototype.$auth = auth;
 //global value
 var roomId = ""
 var userId = ""
 var name = ""
 const global = {
+  db:db,
+  auth:auth,
   userId:userId,
   roomId:roomId,
   name:name
